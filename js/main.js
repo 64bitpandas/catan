@@ -1,6 +1,6 @@
 const ROLLS = [];
 const STATUSES = ['initiative', 'life', 'freedom', 'sheep', 'revenge', 'firstborn child', 'mortal enemy', 'strength', 'midterm grade', 'next snakpass gift'];
-
+const EMOJIS = ["😀","😃","😄","😁","😆","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","☹️","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖","🎃","😺","😸","😹","😻","😼","😽","🙀","😿","😾"]
 /**
  * 0: completely random 2d6
  * 1: ordered bag of 2d6 rolls
@@ -26,12 +26,13 @@ document.getElementById('roll-btn').addEventListener('click', () => {
     }
     let num = ROLLS.pop();
     let interval = setInterval(() => {
-        document.getElementById('roll-out').innerHTML = `Current roll: ${Math.ceil(Math.random() * 12)}`;
+        document.getElementById('roll-out').innerHTML = `Current roll: ${EMOJIS[Math.floor(Math.random() * EMOJIS.length)]}`;
     }, 100);
     setTimeout(() => {
         clearInterval(interval); 
-    }, 1000);
+    }, 8000);
     setTimeout(() => {
+        console.log(ROLLS);
         document.getElementById('roll-out').innerHTML = `Current roll: ${num}`;
         document.getElementById('roll-left').innerHTML = `Rolls left in bag: ${ROLLS.length}`;
     }, 1200);
