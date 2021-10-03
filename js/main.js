@@ -30,9 +30,11 @@ document.getElementById('roll-btn').addEventListener('click', () => {
     }, 100);
     setTimeout(() => {
         clearInterval(interval); 
+    }, 1000);
+    setTimeout(() => {
         document.getElementById('roll-out').innerHTML = `Current roll: ${num}`;
         document.getElementById('roll-left').innerHTML = `Rolls left in bag: ${ROLLS.length}`;
-    }, 1000);
+    }, 1200);
 
 })
 
