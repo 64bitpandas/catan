@@ -21,15 +21,18 @@ genRolls();
 
 document.getElementById('roll-btn').addEventListener('click', () => {
     document.getElementById('roll-btn').innerHTML = `roll for your ${STATUSES[Math.floor(Math.random() * STATUSES.length)]}`
-    if(ROLLS.length === 0) {
+    if (ROLLS.length === 0) {
         genRolls();
     }
     let num = ROLLS.pop();
     let interval = setInterval(() => {
         document.getElementById('roll-out').innerHTML = `Current roll: ${Math.ceil(Math.random() * 12)}`;
     }, 100);
-    setTimeout(() => clearInterval(interval), 1000);
-    document.getElementById('roll-out').innerHTML = `Current roll: ${num}`;
-    document.getElementById('roll-left').innerHTML = `Rolls left in bag: ${ROLLS.length}`;
+    setTimeout(() => {
+        clearInterval(interval); 
+        document.getElementById('roll-out').innerHTML = `Current roll: ${num}`;
+        document.getElementById('roll-left').innerHTML = `Rolls left in bag: ${ROLLS.length}`;
+    }, 1000);
+
 })
 
