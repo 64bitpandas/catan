@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+button {
+    height: 10vh;
+}
+
+p {
+    font-size: 36px;
+}
