@@ -30,7 +30,7 @@ document.getElementById('roll-btn').addEventListener('click', () => {
     }, 100);
     setTimeout(() => {
         clearInterval(interval); 
-    }, 8000);
+    }, 800);
     setTimeout(() => {
         console.log(ROLLS);
         document.getElementById('roll-out').innerHTML = `Current roll: ${num}`;
