@@ -11,3 +11,28 @@ button {
 p {
     font-size: 36px;
 }
+
+#roll-btn-emoji {
+  font-size: 300%;
+}
+
+#roll-btn {
+  padding: 10px;
+  display: grid;
+  height: 100%;
+}
+
+.spinning {
+  animation: dice-spin 1.5s ease-in-out 0s;
+}
+
+
+
+@keyframes dice-spin {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: rotateZ(1080deg);
+  }
+}
