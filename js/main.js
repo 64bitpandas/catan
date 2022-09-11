@@ -27,6 +27,7 @@ genRolls();
 document.getElementById('roll-btn').addEventListener('click', () => {
     document.getElementById('roll-btn-content').innerHTML = `roll for your ${STATUSES[Math.floor(Math.random() * STATUSES.length)]}`;
     document.getElementById('roll-btn-emoji').classList.add('spinning');
+  document.getElementById('roll-btn').classList.add('rainbowing');
     if (ROLLS.length === 0) {
         genRolls();
     }
@@ -42,6 +43,7 @@ document.getElementById('roll-btn').addEventListener('click', () => {
         document.getElementById('roll-out').innerHTML = `Current roll: ${num}`;
         document.getElementById('roll-left').innerHTML = `Rolls left in bag: ${ROLLS.length}`;
         document.getElementById('roll-btn-emoji').classList.remove('spinning');
+        document.getElementById('roll-btn').classList.remove('rainbowing');
       }
     }, UPDATE_TIME);
 })

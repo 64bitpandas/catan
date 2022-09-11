@@ -1,7 +1,13 @@
+@font-face {
+    font-family: rubik;
+    src: url(Rubik-VariableFont_wght.ttf);
+}
+
 body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    font-family: rubik, sans-serif;
 }
 
 button {
@@ -16,17 +22,26 @@ p {
   font-size: 300%;
 }
 
+#roll-btn-content {
+  font-weight: bold;
+}
+
 #roll-btn {
   padding: 10px;
   display: grid;
   height: 100%;
+  background-color: #ffcada;
+  border-radius: 10px;
+  border: solid black 5px;
 }
 
 .spinning {
   animation: dice-spin 1.5s ease-in-out 0s;
 }
 
-
+.rainbowing {
+  animation: rainbow 1.5s ease-in-out 0s;
+}
 
 @keyframes dice-spin {
   0% {
@@ -34,5 +49,15 @@ p {
   }
   100% {
     transform: rotateZ(1080deg);
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    filter: hue-rotate(0);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
