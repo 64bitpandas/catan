@@ -12,7 +12,7 @@ const BAG_MULTIPLIER = 2;
 let mode = 0;
 
 const genRolls = (mode) => {
-    for(int i = 0; i < BAG_MULTIPLIER; i += 1) {
+    for(let i = 0; i < BAG_MULTIPLIER; i += 1) {
         let base = [...Array(6).keys()].map(i => i + 1);
         for (let x of base) {
             for (let y of base) {
