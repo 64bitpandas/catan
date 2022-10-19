@@ -61,3 +61,21 @@ p {
     filter: hue-rotate(360deg);
   }
 }
+
+.ck-wrap {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+/* .ck-wrapper span {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+} */
+#ck {
+  height: 25px;
+  width: 25px;
+  margin-right: 10px
+}
