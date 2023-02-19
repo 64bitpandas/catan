@@ -1,42 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title>🎲 Catan Roller 🎲</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8">
-  <title>🎲 Catan Roller 🎲</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="🎲 Catan Roller 🎲" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
 
-  <meta property="og:title" content="🎲 Catan Roller 🎲">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <!-- Place favicon.ico in the root directory -->
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/custom.css" />
 
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/custom.css">
+    <meta name="theme-color" content="#fafafa" />
+  </head>
 
-  <meta name="theme-color" content="#fafafa">
-</head>
-
-<body>
-  <div id="container">
-    <h1>Amazing Catan Roller v0.8</h1>
-    <button id="roll-btn"><div id="roll-btn-emoji">🎲</div><div id="roll-btn-content">roll</div></button>
-    <p id="roll-out"></p>
-    <p id="roll-left">Rolls left in bag: 72</p>
-    <div class="ck-wrap">
-      <input type="checkbox" id="ck" name="ck"> <span>Cities and Knights Mode</span>
+  <body>
+    <div id="container">
+      <h1>Amazing Catan Roller v0.8</h1>
+      <div id="roller">
+        <button id="roll-btn">
+          <div id="roll-btn-emoji">🎲</div>
+          <div id="roll-btn-content">roll</div>
+        </button>
+        <p id="roll-out">&ThinSpace;</p>
+        <p id="roll-left">Rolls left in bag: 72</p>
+      </div>
+      <div class="ck-wrap">
+        <input type="checkbox" id="ck" name="ck" />
+        <span>Cities and Knights Mode</span>
+      </div>
     </div>
-  </div>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/color-theme.js"></script>
-</body>
-
+    <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/color-theme.js"></script>
+  </body>
 </html>

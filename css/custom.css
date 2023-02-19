@@ -22,6 +22,17 @@ body {
   justify-content: center;
   text-align: center;
   height: 100vh;
+  position: relative;
+}
+
+#roller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 50%;
+  min-width: 300px;
 }
 
 button {
@@ -29,11 +40,13 @@ button {
 }
 
 p {
-  font-size: 36px;
+  font-size: 2rem;
+  margin: 0;
+  margin-bottom: 1.25rem;
 }
 
 #roll-btn-emoji {
-  font-size: 300%;
+  font-size: 3rem;
 }
 
 #roll-btn-content {
@@ -43,6 +56,7 @@ p {
 
 #roll-btn {
   padding: 10px;
+  margin-bottom: 1.25rem;
   display: grid;
   height: 100px;
   width: 300px;
