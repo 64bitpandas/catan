@@ -42,7 +42,7 @@ button {
 p {
   font-size: 2rem;
   margin: 0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 #roll-btn-emoji {
@@ -99,10 +99,41 @@ p {
   text-align: center;
 }
 
-#ck {
+select {
+  margin-right: 10px;
+}
+
+input[type="checkbox"] {
   height: 25px;
   width: 25px;
   margin-right: 10px;
+}
+
+#preferences {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 50%;
+  min-width: 300px;
+}
+
+#preferences ul {
+  padding: 0;
+}
+
+#preferences li {
+  list-style-type: none;
+}
+
+.preference-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 :root {

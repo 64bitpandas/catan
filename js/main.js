@@ -1,3 +1,9 @@
+const DiceType = {
+  Random2d6: 0,
+  OrderedBag2d6: 1,
+  d12: 2
+};
+
 const ROLLS = [];
 const STATUSES = ["initiative", "life", "freedom", "sheep", "revenge", "firstborn child", "mortal enemy", "strength", "midterm grade", "next snakpass gift", "intelligence", "seduction", "strength"];
 const EMOJIS = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "🥲", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸", "🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😱", "😨", "😰", "😥", "😓", "🤗", "🤔", "🤭", "🤫", "🤥", "😶", "😐", "😑", "😬", "🙄", "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😵", "🤐", "🥴", "🤢", "🤮", "🤧", "😷", "🤒", "🤕", "🤑", "🤠", "😈", "👿", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾"];
@@ -70,3 +76,83 @@ document.getElementById("roll-btn").addEventListener("click", () => {
     }
   }, UPDATE_TIME);
 });
+
+const preferences = [
+  {
+    id: "dark-mode",
+    name: "Enable dark Mode",
+    type: "checkbox",
+    default: localStorage.getItem("theme") === "dark",
+    explanation: "Toggles the website between light and dark mode. Enable to choose dark mode, disable to choose light mode. Defaults to the system theme.",
+    onChange: (newValue) => {}
+  },
+  {
+    id: "prevent-sleep",
+    name: "Prevent device sleep",
+    type: "checkbox",
+    default: false,
+    explanation: "Prevents the device from sleeping while the page is open. This is useful if you want to pass this device around and avoid having to login again when the device sleeps.",
+    onChange: (newValue) => {}
+  },
+  {
+    id: "dice-type",
+    name: "Dice type",
+    type: "select",
+    options: [
+      {
+        name: "Random 2d6",
+        value: DiceType.Random2d6
+      },
+      {
+        name: "Ordered bag of 2d6 rolls",
+        value: DiceType.OrderedBag2d6
+      },
+      {
+        name: "d12",
+        value: DiceType.d12
+      }
+    ],
+    default: DiceType.Random2d6,
+    explanation: "Changes the type of dice used for rolling. Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice. Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG. d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.",
+    onChange: (newValue) => {}
+  }
+]
+
+const buildPreferences = () => {
+  const preferencesContainer = document.getElementById("preferences");
+  preferencesContainer.innerHTML = "";
+  preferences.forEach((preference) => {
+    const preferenceContainer = document.createElement("div");
+    preferenceContainer.classList.add("preference-container");
+
+    let preferenceInput = document.createElement("input");
+    preferenceInput.id = preference.id;
+    switch(preference.type) {
+      case "select":
+        preferenceInput = document.createElement("select");
+        preferenceInput.innerHTML = preference.options.map((option) => {
+          return `<option value="${option.value}">${option.name}</option>`
+        }).join("");
+        break;
+      case "checkbox":
+        preferenceInput.type = "checkbox";
+        preferenceInput.checked = preference.default;
+        break;
+      default:
+        console.warn(`Unknown preference type selected: ${preference.type}`)
+        break;
+    }
+
+    preferenceInput.addEventListener("change", () => {
+      preference.onChange(preferenceInput.checked);
+    });
+
+    const preferenceName = document.createElement("span");
+    preferenceName.classList.add("preference-name");
+    preferenceName.innerHTML = preference.name;
+    preferenceContainer.appendChild(preferenceInput);
+    preferenceContainer.appendChild(preferenceName);
+    preferencesContainer.appendChild(preferenceContainer);
+  });
+}
+buildPreferences();
