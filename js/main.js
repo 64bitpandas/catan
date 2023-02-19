@@ -2,8 +2,8 @@
 const NoSleep = require("./vendor/nosleep-0.12.0.min.js")
 
 const DiceType = {
-  Random2d6: 0,
-  OrderedBag2d6: 1,
+  OrderedBag2d6: 0,
+  Random2d6: 1,
   d12: 2
 };
 
@@ -15,8 +15,8 @@ const UPDATE_TIME = 75;
 const BAG_MULTIPLIER = 2;
 const CK_COLORS = ["black", "black", "black", "#304ffe", "#00c853", "#ffb300"];
 /**
- * 0: completely random 2d6
- * 1: ordered bag of 2d6 rolls
+ * 0: ordered bag of 2d6 rolls
+ * 1: completely random 2d6
  * 2: d12
  */
 let mode = 0;
@@ -150,7 +150,7 @@ const buildPreferences = () => {
       case "select":
         preferenceInput = document.createElement("select");
         preferenceInput.innerHTML = preference.options.map((option) => {
-          return `<option value="${option.value}">${option.name}</option>`
+          return `<option value="${option.value}" ${preference.default === option.value ? "selected=\"selected\"" : ""}>${option.name}</option>`
         }).join("");
         break;
       case "checkbox":
