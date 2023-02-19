@@ -28,7 +28,7 @@ const genRolls = (mode) => {
 };
 genRolls();
 
-document.getElementById("ck").addEventListener("mouseup", () => { console.log("Changed"); ck = !ck });
+document.getElementById("ck").addEventListener("mouseup", () => ck = !ck);
 
 document.getElementById("roll-btn").addEventListener("click", () => {
   document.getElementById("roll-btn-content").innerHTML = `roll for your ${
