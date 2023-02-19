@@ -89,7 +89,15 @@ const preferences = [
     type: "checkbox",
     default: localStorage.getItem("theme") === "dark",
     explanation: "Toggles the website between light and dark mode. Enable to choose dark mode, disable to choose light mode. Defaults to the system theme.",
-    onChange: (newValue) => {}
+    onChange: (newValue) => {
+      if (newValue) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+      }
+    }
   },
   {
     id: "prevent-sleep",
