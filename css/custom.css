@@ -8,6 +8,19 @@ body {
   flex-direction: column;
   padding: 20px;
   font-family: rubik, sans-serif;
+  background-color: #f2f2f2;
+}
+
+#container {
+  display: flex;
+  align-self: center;
+  width: 70vw;
+  min-width: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
 }
 
 button {
@@ -24,15 +37,17 @@ p {
 
 #roll-btn-content {
   font-weight: bold;
+  color: #1e1e1e;
 }
 
 #roll-btn {
   padding: 10px;
   display: grid;
-  height: 100%;
+  height: 100px;
+  width: 300px;
   background-color: #ffcada;
   border-radius: 10px;
-  border: solid black 5px;
+  border: solid #1e1e1e 5px;
 }
 
 .spinning {
@@ -68,14 +83,25 @@ p {
   align-content: center;
   text-align: center;
 }
-/* .ck-wrapper span {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-} */
+
 #ck {
   height: 25px;
   width: 25px;
   margin-right: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1e1e1e;
+    color: #f2f2f2;
+  }
+
+  #roll-btn {
+    background-color: #53202f;
+    border: solid #f2f2f2 5px;
+  }
+
+  #roll-btn-content {
+    color: #f2f2f2;
+  }
 }
