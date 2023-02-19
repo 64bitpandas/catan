@@ -16,6 +16,7 @@ let mode = 0;
 let ck = document.getElementById("ck").checked;
 
 const genRolls = (mode) => {
+  // TODO: implement mode
   for (let i = 0; i < BAG_MULTIPLIER; i += 1) {
     let base = [...Array(6).keys()].map((i) => i + 1);
     for (let x of base) {
@@ -36,9 +37,11 @@ document.getElementById("roll-btn").addEventListener("click", () => {
   }`;
   document.getElementById("roll-btn-emoji").classList.add("spinning");
   document.getElementById("roll-btn").classList.add("rainbowing");
+
   if (ROLLS.length === 0) {
     genRolls();
   }
+
   let num = ROLLS.pop();
   let refreshes = Math.floor(ROLL_TIME / UPDATE_TIME);
   let interval = setInterval(() => {
@@ -49,7 +52,6 @@ document.getElementById("roll-btn").addEventListener("click", () => {
       refreshes -= 1;
     } else {
       clearInterval(interval);
-      console.log(ROLLS);
 
       if (!ck) {
         document.getElementById("roll-out").innerHTML = `Current roll: ${
