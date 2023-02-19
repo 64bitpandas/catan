@@ -1,21 +1,21 @@
 @font-face {
-    font-family: rubik;
-    src: url(Rubik-VariableFont_wght.ttf);
+  font-family: rubik;
+  src: url(Rubik-VariableFont_wght.ttf);
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    font-family: rubik, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  font-family: rubik, sans-serif;
 }
 
 button {
-    height: 10vh;
+  height: 10vh;
 }
 
 p {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 #roll-btn-emoji {
@@ -77,5 +77,5 @@ p {
 #ck {
   height: 25px;
   width: 25px;
-  margin-right: 10px
+  margin-right: 10px;
 }
