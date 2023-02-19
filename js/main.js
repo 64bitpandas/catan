@@ -13,12 +13,7 @@ const CK_COLORS = ["black", "black", "black", "#304ffe", "#00c853", "#ffb300"];
 let mode = 0;
 
 // True if cities and knights is enabled
-let ck = false;
-
-const onck = () => {
-  ck = !ck;
-  console.log("CK IS", ck);
-};
+let ck = document.getElementById("ck").checked;
 
 const genRolls = (mode) => {
   for (let i = 0; i < BAG_MULTIPLIER; i += 1) {
@@ -32,6 +27,8 @@ const genRolls = (mode) => {
   }
 };
 genRolls();
+
+document.getElementById("ck").addEventListener("mouseup", () => { console.log("Changed"); ck = !ck });
 
 document.getElementById("roll-btn").addEventListener("click", () => {
   document.getElementById("roll-btn-content").innerHTML = `roll for your ${
