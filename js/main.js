@@ -139,8 +139,8 @@ const preferences = [
       mode = parseInt(newValue)
 
       if(mode === DiceType.d12) {
-        document.getElementById("ck-d12-warning").style.visibility = "hidden"
-        document.getElementById("ck-d12-warning").style.opacity = "0"
+        document.getElementById("ck-d12-warning").style.visibility = ""
+        document.getElementById("ck-d12-warning").style.opacity = ""
         document.getElementById("ck").checked = false;
         document.getElementById("ck").setAttribute("disabled", "disabled");
         document.getElementById("ck-d12-warning").style.display = "block";
