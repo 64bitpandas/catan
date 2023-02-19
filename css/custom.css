@@ -93,12 +93,12 @@ p {
 
 :root {
   --background-color: #f2f2f2;
-  --text-color: #1e1e1e;
+  --text-color: #2f3034;
   --button-background-color: #ffcada;
 }
 
 [data-theme="dark"] {
-  --background-color: #1e1e1e;
+  --background-color: #2f3034;
   --text-color: #f2f2f2;
-  --button-background-color: #53202f;
+  --button-background-color: #6c243a;
 }
