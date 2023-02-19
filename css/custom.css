@@ -8,7 +8,8 @@ body {
   flex-direction: column;
   padding: 20px;
   font-family: rubik, sans-serif;
-  background-color: #f2f2f2;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 #container {
@@ -37,7 +38,7 @@ p {
 
 #roll-btn-content {
   font-weight: bold;
-  color: #1e1e1e;
+  color: var(--text-color);
 }
 
 #roll-btn {
@@ -45,9 +46,9 @@ p {
   display: grid;
   height: 100px;
   width: 300px;
-  background-color: #ffcada;
+  background-color: var(--button-background-color);
   border-radius: 10px;
-  border: solid #1e1e1e 5px;
+  border: solid var(--text-color) 5px;
 }
 
 .spinning {
@@ -90,18 +91,14 @@ p {
   margin-right: 10px;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1e1e1e;
-    color: #f2f2f2;
-  }
+:root {
+  --background-color: #f2f2f2;
+  --text-color: #1e1e1e;
+  --button-background-color: #ffcada;
+}
 
-  #roll-btn {
-    background-color: #53202f;
-    border: solid #f2f2f2 5px;
-  }
-
-  #roll-btn-content {
-    color: #f2f2f2;
-  }
+[data-theme="dark"] {
+  --background-color: #1e1e1e;
+  --text-color: #f2f2f2;
+  --button-background-color: #53202f;
 }
