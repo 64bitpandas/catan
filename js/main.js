@@ -1,3 +1,6 @@
+// import nosleep
+const NoSleep = require("./vendor/nosleep-0.12.0.min.js")
+
 const DiceType = {
   Random2d6: 0,
   OrderedBag2d6: 1,
@@ -77,6 +80,8 @@ document.getElementById("roll-btn").addEventListener("click", () => {
   }, UPDATE_TIME);
 });
 
+const noSleep = new NoSleep();
+
 const preferences = [
   {
     id: "dark-mode",
@@ -92,7 +97,13 @@ const preferences = [
     type: "checkbox",
     default: false,
     explanation: "Prevents the device from sleeping while the page is open. This is useful if you want to pass this device around and avoid having to login again when the device sleeps.",
-    onChange: (newValue) => {}
+    onChange: (newValue) => {
+      if (newValue) {
+        noSleep.enable();
+      } else {
+        noSleep.disable();
+      }
+    }
   },
   {
     id: "dice-type",
@@ -112,7 +123,7 @@ const preferences = [
         value: DiceType.d12
       }
     ],
-    default: DiceType.Random2d6,
+    default: DiceType.OrderedBag2d6,
     explanation: "Changes the type of dice used for rolling. Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice. Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG. d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.",
     onChange: (newValue) => {}
   }
