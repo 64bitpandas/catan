@@ -1,5 +1,5 @@
-const NoSleep = require("./vendor/nosleep-0.12.0.min.js");
-const toggleTheme = require("./color-theme.js").toggleTheme;
+import NoSleep from "./vendor/nosleep-0.12.0.min";
+import { toggleTheme } from "./color-theme";
 
 const DiceType = {
   Random2d6: 0,
@@ -121,13 +121,8 @@ const preferences = [
     explanation:
       "Toggles the website between light and dark mode. Enable to choose dark mode, disable to choose light mode. Defaults to the system theme.",
     onChange: (newValue) => {
-      if (newValue) {
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-      }
+      if(newValue) toggleTheme("dark");
+      else toggleTheme("light");
     },
   },
   {
