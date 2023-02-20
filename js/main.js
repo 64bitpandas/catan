@@ -1,5 +1,5 @@
 // import nosleep
-const NoSleep = require("./vendor/nosleep-0.12.0.min.js")
+const NoSleep = require("./vendor/nosleep-0.12.0.min.js");
 
 const DiceType = {
   Random2d6: 0,
@@ -9,8 +9,8 @@ const DiceType = {
 };
 
 const ROLLS = [];
-const STATUSES = ["initiative", "life", "freedom", "sheep", "revenge", "firstborn child", "mortal enemy", "strength", "midterm grade", "next snakpass gift", "intelligence", "seduction", "strength"];
-const EMOJIS = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "🥲", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸", "🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😱", "😨", "😰", "😥", "😓", "🤗", "🤔", "🤭", "🤫", "🤥", "😶", "😐", "😑", "😬", "🙄", "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😵", "🤐", "🥴", "🤢", "🤮", "🤧", "😷", "🤒", "🤕", "🤑", "🤠", "😈", "👿", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾"];
+const STATUSES = ["initiative","life","freedom","sheep","revenge","firstborn child","mortal enemy","strength","midterm grade","next snakpass gift","intelligence","seduction","strength"];
+const EMOJIS = ["😀","😃","😄","😁","😆","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","☹️","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖","🎃","😺","😸","😹","😻","😼","😽","🙀","😿","😾",];
 const ROLL_TIME = 1500;
 const UPDATE_TIME = 75;
 const CK_COLORS = ["black", "black", "black", "#304ffe", "#00c853", "#ffb300"];
@@ -21,10 +21,9 @@ let mode = DiceType.OrderedBag2d6;
 let ck = document.getElementById("ck").checked;
 
 const genRolls = () => {
-  console.log("ok")
   let numSides = 6;
   let bagMultiplier = 2;
-  if(mode === DiceType.OrderedBagd12) {
+  if (mode === DiceType.OrderedBagd12) {
     numSides = 12;
     bagMultiplier = 6;
   }
@@ -32,8 +31,8 @@ const genRolls = () => {
   for (let i = 0; i < bagMultiplier; i += 1) {
     let base = [...Array(numSides).keys()].map((i) => i + 1);
     for (let x of base) {
-      if(mode === DiceType.OrderedBagd12) {
-        ROLLS.push([x, 0])
+      if (mode === DiceType.OrderedBagd12) {
+        ROLLS.push([x, 0]);
       } else {
         for (let y of base) {
           ROLLS.push([x, y]);
@@ -56,15 +55,20 @@ document.getElementById("roll-btn").addEventListener("click", () => {
   document.getElementById("roll-btn-emoji").classList.add("spinning");
   document.getElementById("roll-btn").classList.add("rainbowing");
 
-  if (ROLLS.length === 0 && (mode === DiceType.OrderedBag2d6 || mode === DiceType.OrderedBagd12)) {
-    console.log(mode)
+  if (
+    ROLLS.length === 0 &&
+    (mode === DiceType.OrderedBag2d6 || mode === DiceType.OrderedBagd12)
+  ) {
     genRolls();
   }
 
   let num = 0;
-  switch(mode) {
+  switch (mode) {
     case DiceType.Random2d6:
-      num = [Math.floor(Math.random() * 6 + 1), Math.floor(Math.random() * 6 + 1)];
+      num = [
+        Math.floor(Math.random() * 6 + 1),
+        Math.floor(Math.random() * 6 + 1),
+      ];
       break;
     case DiceType.OrderedBag2d6:
       num = ROLLS.pop();
@@ -76,8 +80,6 @@ document.getElementById("roll-btn").addEventListener("click", () => {
       num = ROLLS.pop();
       break;
   }
-
-  console.log(num);
 
   let refreshes = Math.floor(ROLL_TIME / UPDATE_TIME);
   let interval = setInterval(() => {
@@ -116,7 +118,8 @@ const preferences = [
     name: "Enable Dark Mode",
     type: "checkbox",
     default: localStorage.getItem("theme") === "dark",
-    explanation: "Toggles the website between light and dark mode. Enable to choose dark mode, disable to choose light mode. Defaults to the system theme.",
+    explanation:
+      "Toggles the website between light and dark mode. Enable to choose dark mode, disable to choose light mode. Defaults to the system theme.",
     onChange: (newValue) => {
       if (newValue) {
         document.documentElement.setAttribute("data-theme", "dark");
@@ -125,21 +128,22 @@ const preferences = [
         document.documentElement.setAttribute("data-theme", "light");
         localStorage.setItem("theme", "light");
       }
-    }
+    },
   },
   {
     id: "prevent-sleep",
     name: "Prevent Device Sleep",
     type: "checkbox",
     default: false,
-    explanation: "Prevents the device from sleeping while the page is open. This is useful if you want to pass this device around and avoid having to login again when the device sleeps.",
+    explanation:
+      "Prevents the device from sleeping while the page is open. This is useful if you want to pass this device around and avoid having to login again when the device sleeps.",
     onChange: (newValue) => {
       if (newValue) {
         noSleep.enable();
       } else {
         noSleep.disable();
       }
-    }
+    },
   },
   {
     id: "dice-type",
@@ -148,33 +152,32 @@ const preferences = [
     options: [
       {
         name: "Random 2d6",
-        value: DiceType.Random2d6
+        value: DiceType.Random2d6,
       },
 
       {
         name: "Ordered bag of 2d6 rolls",
-        value: DiceType.OrderedBag2d6
+        value: DiceType.OrderedBag2d6,
       },
       {
         name: "Random d12",
-        value: DiceType.Randomd12
+        value: DiceType.Randomd12,
       },
       {
         name: "Ordered bag of d12 rolls",
-        value: DiceType.OrderedBagd12
+        value: DiceType.OrderedBagd12,
       },
     ],
     default: DiceType.OrderedBag2d6,
-    explanation: "Changes the type of dice used for rolling.<br /><br />Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice.<br /><br />Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG.<br /><br />Random d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.<br /><br /> Ordered bag of d12 rolls uses the same method as the ordered bag of 2d6 rolls, but with a 12 sided die.",
+    explanation:
+      "Changes the type of dice used for rolling.<br /><br />Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice.<br /><br />Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG.<br /><br />Random d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.<br /><br /> Ordered bag of d12 rolls uses the same method as the ordered bag of 2d6 rolls, but with a 12 sided die.",
     onChange: (newValue) => {
-      mode = parseInt(newValue)
+      mode = parseInt(newValue);
       ROLLS.length = 0;
 
-      console.log(mode)
-
-      if(mode === DiceType.Randomd12 || mode === DiceType.OrderedBagd12) {
-        document.getElementById("ck-d12-warning").style.visibility = ""
-        document.getElementById("ck-d12-warning").style.opacity = ""
+      if (mode === DiceType.Randomd12 || mode === DiceType.OrderedBagd12) {
+        document.getElementById("ck-d12-warning").style.visibility = "";
+        document.getElementById("ck-d12-warning").style.opacity = "";
         document.getElementById("ck").checked = false;
         ck = false;
         document.getElementById("ck").setAttribute("disabled", "disabled");
@@ -184,21 +187,21 @@ const preferences = [
         document.getElementById("ck-d12-warning").style.display = "none";
       }
 
-      if(mode === DiceType.OrderedBag2d6 || mode === DiceType.OrderedBagd12) {
-        console.log("ok")
+      if (mode === DiceType.OrderedBag2d6 || mode === DiceType.OrderedBagd12) {
         document.getElementById("roll-left").style.textDecoration = "none";
-        document.getElementById("roll-left").innerHTML = "Rolls left in bag: 72";
+        document.getElementById("roll-left").innerHTML =
+          "Rolls left in bag: 72";
         document.getElementById("roll-left").style.opacity = "1";
         genRolls();
-      }
-      else {
-        document.getElementById("roll-left").style.textDecoration = "line-through";
+      } else {
+        document.getElementById("roll-left").style.textDecoration =
+          "line-through";
         document.getElementById("roll-left").innerHTML = "Rolls left in bag: 0";
         document.getElementById("roll-left").style.opacity = "0.5";
       }
-    }
-  }
-]
+    },
+  },
+];
 
 const buildPreferences = () => {
   const preferencesContainer = document.getElementById("preferences");
@@ -208,21 +211,32 @@ const buildPreferences = () => {
     preferenceContainer.classList.add("preference-container");
 
     let preferenceInput = document.createElement("input");
-    switch(preference.type) {
+    switch (preference.type) {
       case "select":
         preferenceInput = document.createElement("select");
-        preferenceInput.innerHTML = preference.options.map((option) => {
-          return `<option id="${option.name.toLowerCase().split(" ").join("-")}" value="${option.value}" ${preference.default === option.value ? "selected=\"selected\"" : ""}>${option.name}</option>`
-        }).join("");
-        preferenceInput.addEventListener("change", () => preference.onChange(preferenceInput.value));
+        preferenceInput.innerHTML = preference.options
+          .map((option) => {
+            return `<option id="${option.name
+              .toLowerCase()
+              .split(" ")
+              .join("-")}" value="${option.value}" ${
+              preference.default === option.value ? 'selected="selected"' : ""
+            }>${option.name}</option>`;
+          })
+          .join("");
+        preferenceInput.addEventListener("change", () =>
+          preference.onChange(preferenceInput.value)
+        );
         break;
       case "checkbox":
         preferenceInput.type = "checkbox";
         preferenceInput.checked = preference.default;
-        preferenceInput.addEventListener("change", () => preference.onChange(preferenceInput.checked));
+        preferenceInput.addEventListener("change", () =>
+          preference.onChange(preferenceInput.checked)
+        );
         break;
       default:
-        console.warn(`Unknown preference type selected: ${preference.type}`)
+        console.warn(`Unknown preference type selected: ${preference.type}`);
         break;
     }
 
@@ -233,7 +247,9 @@ const buildPreferences = () => {
     preferenceName.innerHTML = preference.name;
 
     const preferenceQuestionMarkContainer = document.createElement("div");
-    preferenceQuestionMarkContainer.classList.add("preference-question-mark-container");
+    preferenceQuestionMarkContainer.classList.add(
+      "preference-question-mark-container"
+    );
     preferenceQuestionMarkContainer.classList.add("tooltip");
 
     const preferenceExplanation = document.createElement("span");
@@ -255,5 +271,5 @@ const buildPreferences = () => {
     preferenceContainer.appendChild(preferenceQuestionMarkContainer);
     preferencesContainer.appendChild(preferenceContainer);
   });
-}
+};
 buildPreferences();
