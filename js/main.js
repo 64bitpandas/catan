@@ -4,7 +4,7 @@ const NoSleep = require("./vendor/nosleep-0.12.0.min.js")
 const DiceType = {
   Random2d6: 0,
   OrderedBag2d6: 1,
-  d12: 2,
+  Randomd12: 2,
   OrderedBagd12: 3,
 };
 
@@ -13,25 +13,31 @@ const STATUSES = ["initiative", "life", "freedom", "sheep", "revenge", "firstbor
 const EMOJIS = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "🥲", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸", "🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😱", "😨", "😰", "😥", "😓", "🤗", "🤔", "🤭", "🤫", "🤥", "😶", "😐", "😑", "😬", "🙄", "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😵", "🤐", "🥴", "🤢", "🤮", "🤧", "😷", "🤒", "🤕", "🤑", "🤠", "😈", "👿", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾"];
 const ROLL_TIME = 1500;
 const UPDATE_TIME = 75;
-const BAG_MULTIPLIER = 2;
 const CK_COLORS = ["black", "black", "black", "#304ffe", "#00c853", "#ffb300"];
-/**
- * 0: ordered bag of 2d6 rolls
- * 1: completely random 2d6
- * 2: d12
- */
-let mode = 0;
+
+let mode = DiceType.OrderedBag2d6;
 
 // True if cities and knights is enabled
 let ck = document.getElementById("ck").checked;
 
-const genRolls = (mode) => {
-  // TODO: implement mode
-  for (let i = 0; i < BAG_MULTIPLIER; i += 1) {
-    let base = [...Array(6).keys()].map((i) => i + 1);
+const genRolls = () => {
+  console.log("ok")
+  let numSides = 6;
+  let bagMultiplier = 2;
+  if(mode === DiceType.OrderedBagd12) {
+    numSides = 12;
+    bagMultiplier = 6;
+  }
+
+  for (let i = 0; i < bagMultiplier; i += 1) {
+    let base = [...Array(numSides).keys()].map((i) => i + 1);
     for (let x of base) {
-      for (let y of base) {
-        ROLLS.push([x, y]);
+      if(mode === DiceType.OrderedBagd12) {
+        ROLLS.push([x, 0])
+      } else {
+        for (let y of base) {
+          ROLLS.push([x, y]);
+        }
       }
     }
     ROLLS.sort(() => 0.5 - Math.random());
@@ -50,11 +56,29 @@ document.getElementById("roll-btn").addEventListener("click", () => {
   document.getElementById("roll-btn-emoji").classList.add("spinning");
   document.getElementById("roll-btn").classList.add("rainbowing");
 
-  if (ROLLS.length === 0) {
+  if (ROLLS.length === 0 && (mode === DiceType.OrderedBag2d6 || mode === DiceType.OrderedBagd12)) {
+    console.log(mode)
     genRolls();
   }
 
-  let num = ROLLS.pop();
+  let num = 0;
+  switch(mode) {
+    case DiceType.Random2d6:
+      num = [Math.floor(Math.random() * 6 + 1), Math.floor(Math.random() * 6 + 1)];
+      break;
+    case DiceType.OrderedBag2d6:
+      num = ROLLS.pop();
+      break;
+    case DiceType.Randomd12:
+      num = [Math.floor(Math.random() * 11 + 2), 0];
+      break;
+    case DiceType.OrderedBagd12:
+      num = ROLLS.pop();
+      break;
+  }
+
+  console.log(num);
+
   let refreshes = Math.floor(ROLL_TIME / UPDATE_TIME);
   let interval = setInterval(() => {
     if (refreshes > 0) {
@@ -66,6 +90,7 @@ document.getElementById("roll-btn").addEventListener("click", () => {
       clearInterval(interval);
 
       if (!ck) {
+        document.getElementById("roll-out").style.color = "";
         document.getElementById("roll-out").innerHTML = `Current roll: ${
           num[0] + num[1]
         }`;
@@ -131,8 +156,8 @@ const preferences = [
         value: DiceType.OrderedBag2d6
       },
       {
-        name: "d12",
-        value: DiceType.d12
+        name: "Random d12",
+        value: DiceType.Randomd12
       },
       {
         name: "Ordered bag of d12 rolls",
@@ -140,19 +165,36 @@ const preferences = [
       },
     ],
     default: DiceType.OrderedBag2d6,
-    explanation: "Changes the type of dice used for rolling.<br /><br />Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice.<br /><br />Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG.<br /><br />d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.<br /><br /> Ordered bag of d12 rolls uses the same method as the ordered bag of 2d6 rolls, but with a 12 sided die.",
+    explanation: "Changes the type of dice used for rolling.<br /><br />Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice.<br /><br />Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG.<br /><br />Random d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.<br /><br /> Ordered bag of d12 rolls uses the same method as the ordered bag of 2d6 rolls, but with a 12 sided die.",
     onChange: (newValue) => {
       mode = parseInt(newValue)
+      ROLLS.length = 0;
 
-      if(mode === DiceType.d12 || mode === DiceType.OrderedBagd12) {
+      console.log(mode)
+
+      if(mode === DiceType.Randomd12 || mode === DiceType.OrderedBagd12) {
         document.getElementById("ck-d12-warning").style.visibility = ""
         document.getElementById("ck-d12-warning").style.opacity = ""
         document.getElementById("ck").checked = false;
+        ck = false;
         document.getElementById("ck").setAttribute("disabled", "disabled");
         document.getElementById("ck-d12-warning").style.display = "block";
       } else {
         document.getElementById("ck").removeAttribute("disabled");
         document.getElementById("ck-d12-warning").style.display = "none";
+      }
+
+      if(mode === DiceType.OrderedBag2d6 || mode === DiceType.OrderedBagd12) {
+        console.log("ok")
+        document.getElementById("roll-left").style.textDecoration = "none";
+        document.getElementById("roll-left").innerHTML = "Rolls left in bag: 72";
+        document.getElementById("roll-left").style.opacity = "1";
+        genRolls();
+      }
+      else {
+        document.getElementById("roll-left").style.textDecoration = "line-through";
+        document.getElementById("roll-left").innerHTML = "Rolls left in bag: 0";
+        document.getElementById("roll-left").style.opacity = "0.5";
       }
     }
   }
@@ -197,8 +239,9 @@ const buildPreferences = () => {
     const preferenceExplanation = document.createElement("span");
     preferenceExplanation.classList.add("tooltiptext");
     preferenceExplanation.innerHTML = preference.explanation;
-    preferenceExplanation.style.width = "400px";
-    preferenceExplanation.style.marginLeft = "-200px";
+    preferenceExplanation.style.width = "300px";
+    preferenceExplanation.style.marginLeft = "-250px";
+    preferenceExplanation.style.fontSize = "0.75rem";
 
     const preferenceQuestionMark = document.createElement("span");
     preferenceQuestionMark.classList.add("preference-question-mark");
