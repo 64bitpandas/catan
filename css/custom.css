@@ -16,7 +16,7 @@ body {
   display: flex;
   align-self: center;
   width: 70vw;
-  min-width: 300px;
+  min-width: 350px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -32,7 +32,7 @@ body {
   justify-content: center;
   text-align: center;
   width: 50%;
-  min-width: 300px;
+  min-width: 350px;
 }
 
 button {
@@ -116,7 +116,7 @@ input[type="checkbox"] {
   justify-content: center;
   text-align: center;
   width: 50%;
-  min-width: 300px;
+  min-width: 350px;
 }
 
 #preferences ul {
@@ -136,6 +136,18 @@ input[type="checkbox"] {
   margin-bottom: 1rem;
 }
 
+.preference-question-mark-container {
+  margin-left: 0.5rem;
+  padding-left: 0.425rem;
+  padding-right: 0.425rem;
+  border: solid #aaa 1px;
+  border-radius: 50px;
+}
+
+.preference-question-mark {
+  opacity: 0.5;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -147,7 +159,7 @@ input[type="checkbox"] {
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 10px 0;
   position: absolute;
   z-index: 1;
   bottom: 125%;

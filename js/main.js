@@ -2,9 +2,10 @@
 const NoSleep = require("./vendor/nosleep-0.12.0.min.js")
 
 const DiceType = {
-  OrderedBag2d6: 0,
-  Random2d6: 1,
-  d12: 2
+  Random2d6: 0,
+  OrderedBag2d6: 1,
+  d12: 2,
+  OrderedBagd12: 3,
 };
 
 const ROLLS = [];
@@ -121,24 +122,29 @@ const preferences = [
     type: "select",
     options: [
       {
+        name: "Random 2d6",
+        value: DiceType.Random2d6
+      },
+
+      {
         name: "Ordered bag of 2d6 rolls",
         value: DiceType.OrderedBag2d6
       },
       {
-        name: "Random 2d6",
-        value: DiceType.Random2d6
-      },
-      {
         name: "d12",
         value: DiceType.d12
-      }
+      },
+      {
+        name: "Ordered bag of d12 rolls",
+        value: DiceType.OrderedBagd12
+      },
     ],
     default: DiceType.OrderedBag2d6,
-    explanation: "Changes the type of dice used for rolling. Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice. Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG. d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.",
+    explanation: "Changes the type of dice used for rolling.<br /><br />Random 2d6 is the default and is equivalent to rolling a pair of 6-sided dice.<br /><br />Ordered bag of 2d6 rolls uses a 2x binomial distribution of dice (72 possible rolls) that ensures each number shows up proportionally to its frequency in the game, reducing the effects of RNG.<br /><br />d12 is a single 12-sided die with 1 removed and makes rolling a uniform distribution, effectively making a 2 roll as likely as a 7 roll.<br /><br /> Ordered bag of d12 rolls uses the same method as the ordered bag of 2d6 rolls, but with a 12 sided die.",
     onChange: (newValue) => {
       mode = parseInt(newValue)
 
-      if(mode === DiceType.d12) {
+      if(mode === DiceType.d12 || mode === DiceType.OrderedBagd12) {
         document.getElementById("ck-d12-warning").style.visibility = ""
         document.getElementById("ck-d12-warning").style.opacity = ""
         document.getElementById("ck").checked = false;
@@ -183,8 +189,27 @@ const buildPreferences = () => {
     const preferenceName = document.createElement("span");
     preferenceName.classList.add("preference-name");
     preferenceName.innerHTML = preference.name;
+
+    const preferenceQuestionMarkContainer = document.createElement("div");
+    preferenceQuestionMarkContainer.classList.add("preference-question-mark-container");
+    preferenceQuestionMarkContainer.classList.add("tooltip");
+
+    const preferenceExplanation = document.createElement("span");
+    preferenceExplanation.classList.add("tooltiptext");
+    preferenceExplanation.innerHTML = preference.explanation;
+    preferenceExplanation.style.width = "400px";
+    preferenceExplanation.style.marginLeft = "-200px";
+
+    const preferenceQuestionMark = document.createElement("span");
+    preferenceQuestionMark.classList.add("preference-question-mark");
+    preferenceQuestionMark.innerHTML = "?";
+
+    preferenceQuestionMarkContainer.appendChild(preferenceExplanation);
+    preferenceQuestionMarkContainer.appendChild(preferenceQuestionMark);
+
     preferenceContainer.appendChild(preferenceInput);
     preferenceContainer.appendChild(preferenceName);
+    preferenceContainer.appendChild(preferenceQuestionMarkContainer);
     preferencesContainer.appendChild(preferenceContainer);
   });
 }
