@@ -15,6 +15,7 @@ if (localStorage.getItem("theme")) {
 //dark theme preferred, set document with a `data-theme` attribute
 if (theme == "dark") {
   document.documentElement.setAttribute("data-theme", "dark");
+  document.getElementById("dark-mode").checked = true;
 }
 
 const toggleTheme = (newTheme) => {
