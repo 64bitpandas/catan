@@ -1,5 +1,5 @@
-// import nosleep
 const NoSleep = require("./vendor/nosleep-0.12.0.min.js");
+const toggleTheme = require("./color-theme.js").toggleTheme;
 
 const DiceType = {
   Random2d6: 0,

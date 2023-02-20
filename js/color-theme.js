@@ -17,14 +17,15 @@ if (theme == "dark") {
   document.documentElement.setAttribute("data-theme", "dark");
 }
 
-const toggleTheme = () => {
-  if (theme == "light") {
-    theme = "dark";
-    document.documentElement.setAttribute("data-theme", "dark");
-    localStorage.setItem("theme", "dark");
-  } else {
-    theme = "light";
-    document.documentElement.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
+const toggleTheme = (newTheme) => {
+  if(newTheme === undefined) {
+    if(theme == "light") theme = "dark";
+    else theme = "light";
   }
+
+  theme = newTheme;
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
 }
+
+export { toggleTheme };
