@@ -12,6 +12,10 @@ body {
   color: var(--text-color);
 }
 
+a {
+  color: var(--text-color);
+}
+
 #container {
   display: flex;
   align-self: center;
