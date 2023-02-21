@@ -1,10 +1,14 @@
 {
-  "name": " ",
-  "version": "0.0.1",
-  "description": "",
-  "keywords": "",
-  "license": "",
-  "author": "",
+  "name": "catan-roller",
+  "version": "1.0.0",
+  "description": "Companion app for Catan, made in 15 minutes",
+  "keywords": [
+    "Catan",
+    "Roller",
+    "Dice"
+  ],
+  "license": "MIT",
+  "author": "Ben Cuan",
   "scripts": {
     "build": "parcel build index.html",
     "dev": "parcel index.html --open",
@@ -12,6 +16,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.5"
   }
 }
